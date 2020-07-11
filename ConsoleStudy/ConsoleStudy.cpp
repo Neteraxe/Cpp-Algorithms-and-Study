@@ -254,8 +254,8 @@ int vector()
  */
 int newloop()
 {
-	int x;
-	std::vector<int> v;
+	double x;
+	std::vector<double> v;
 
 	std::cout << "Enter as many numbers as you want:\n";
 	while (std::cin >> x)
@@ -269,7 +269,7 @@ int newloop()
 
 	// We want greatest_index and least_index to be visible outside the loop, so
 	// we keep them here.
-	std::vector<int>::size_type greatest_index = 0;
+	std::size_t greatest_index = 0;
 	std::size_t least_index = 0;
 
 	for (std::size_t i = 0; i < v.size(); ++i)
@@ -279,8 +279,79 @@ int newloop()
 		if (v[i] < v[least_index])
 			least_index = i;
 	}
-}
 
+	std::cout << "Greatest element " << v[greatest_index] << " is at index " << greatest_index << ".\n";
+	std::cout << "Least elenment " << v[least_index] << " is at index " << least_index << ".\n";
+
+	int total = 0;
+	for (int e : v)
+	{
+		total += e;
+	}
+
+	std::cout << "Sum: " << total << "\n";
+	std::cout << "Integer average: " << total / v.size() << "\n";
+
+	/* If we changed the type of v from vector<int> to vector<double>, much of
+ * the program would work.  However, we'd have to change both int total and
+ * int e above.  When our programs get bigger, changing things like this
+ * will be rather a pain.  For that reason, we can use auto in order to have
+ * the compiler figure out the correct type for us.  This isn't a magic word
+ * that will solve all your problems, but it can help significantly.
+ */
+
+ // For example, let's output all the elements of v:
+	for (auto e : v)
+		std::cout << "v contains: " << e << '\n';
+
+	// Try changing the types in this program and see what works and what
+	// breaks.
+
+
+	return 0;
+}
+/* So far I've introduced you to a few tools that you can use to write programs
+ * of your own.  You can read input, store as much of it as you want, and then
+ * perform calculations using loops.
+ *
+ * In this chapter, we'll introduce you to your first meta-tool: a tool for
+ * making tools.  While you face relatively easy problems such things may seem
+ * to cost more than they saves you, but the slightest increase in complexity
+ * will make them irreplacable.
+ *
+ * I am talking about functions.
+ *
+ * We've already seen the main function.  It had type int() and was where we put
+ * by far most of our code.  Other functions are going to have much the same
+ * structure:
+ *
+ *      return_type function_name() {
+ *          statements...
+ *      }
+ *
+ * This should look fairly familiar now.  The function must return a value of
+ * its return type; if we wish to not return anything we can use the void type,
+ * of which no value can be made.
+ *
+ * Before moving on to more advanced possibilities, let's look at some examples.
+ */
+std::vector<int> read_int_vector() {
+	std::vector<int> result;
+	int x;
+
+	std::cout << "Enter as many numbers as you want:\n";
+
+	// We could use much the same implementation as we used in the last
+// examples, which assumes that if the input failed, there is nothing more
+// to read.  However, let's be a little more thorough and insist that the
+// user keep entering data until he closes the stream.  If a file is being
+// redirected this will happen when the end of the file is reached; when
+// entering data directly, Control-D will do the job on Linux, while
+// Control-Z will work on Windows.
+//
+// Seeing as the exit condition of this loop is rather complicated, we'll
+// make it and endless loop and break out of it differently.
+}
 
 int main()
 {
@@ -289,6 +360,7 @@ int main()
 	//branch();
 	//loop();
 	//vector();
+	//newloop();
 
 	return 0;
 }
