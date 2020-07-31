@@ -284,10 +284,11 @@ int newloop()
 	std::cout << "Least elenment " << v[least_index] << " is at index " << least_index << ".\n";
 
 	int total = 0;
-	for (int e : v)
+	for (auto e : v)
 	{
 		total += e;
 	}
+
 
 	std::cout << "Sum: " << total << "\n";
 	std::cout << "Integer average: " << total / v.size() << "\n";
@@ -429,9 +430,105 @@ std::vector<int> read_int_vector() {
  */
 
 
+int switchLight()
+{
+	//bool default as false
+	std::vector<bool> lights(100, false);
+
+	int num;
+	int light_number;
+	for (num = 1; num < 101; num++)
+	{
+		for (light_number = num - 1; light_number < 100; light_number += num)
+		{
+			lights[light_number] = !lights[light_number];
+		}
+	}
+
+	light_number = 1;
+	std::cout << "The ";
+	for (auto light : lights)
+	{
+		if (light)
+			std::cout << light_number << " ";
+		light_number++;
+	}
+	std::cout << " is on";
+
+	return 0;
+}
+
+
+int lineRaster()
+{
+	std::cout << "Input 4 number(2 2D coordinates) with a gap:\n";
+
+	std::vector<int> numbers;
+
+	int num;
+	for (int i = 0; i < 4; i++)
+	{
+		std::cin >> num;
+		numbers.push_back(num);
+	}
+
+	int minx, miny, maxx, maxy;
+
+	if (numbers[0] < numbers[2])
+	{
+		minx = numbers[0];
+		maxx = numbers[2];
+	}
+	else
+	{
+		minx = numbers[2];
+		maxx = numbers[0];
+	}
+	if (numbers[1] < numbers[3])
+	{
+		miny = numbers[1];
+		maxy = numbers[3];
+	}
+	else
+	{
+		miny = numbers[3];
+		maxy = numbers[1];
+	}
+
+
+	int dx = numbers[2] - numbers[0];
+	int dy = numbers[3] - numbers[1];
+
+	double rate = (double)dy / dx;
+
+
+	int i = 0;
+	int j = 0;
+	for (int l1 = maxy + 1; l1 > -1; l1--)
+	{
+		for (int l2 = 0; l2 < maxx + 2; l2++)
+		{
+			if ((l1 == numbers[0]) || (l2 == numbers[1]))
+			{
+				std::cout << ".";
+				i++;
+			}
+
+
+			else
+				std::cout << "W";
+		}
+		std::cout << "\n";
+	}
+	return 0;
+}
+
 
 int main()
 {
+	//switchLight();
+	//lineRaster();
+
 	//hello();
 	//type();
 	//branch();
@@ -439,6 +536,8 @@ int main()
 	//vector();
 	//newloop();
 
+
+	/*
 	 // Function that, given a vector, returns the average of the elements.
 	int average(std::vector<int> v);
 	// Function that, given a vector, returns the sum of the elements.
@@ -465,6 +564,7 @@ int main()
 	for (auto e : filter_greater_than(v, 5))
 		std::cout << " " << e;
 	std::cout << "\n";
+	*/
 
 	return 0;
 }
