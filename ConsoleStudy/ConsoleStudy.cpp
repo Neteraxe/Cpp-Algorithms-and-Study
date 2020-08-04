@@ -523,6 +523,53 @@ int lineRaster()
 	return 0;
 }
 
+struct ListNode {
+	int val;
+	ListNode* next;
+	//it's a constructor, for example if u call ListNode(5) it will set the parameters val to 5, and next to NULL
+	//ListNode(int x) is a constructorand is called when a ListNode is created.The : val(x), next(NULL) part of it initializes the struct's members. This means set val = x and next = NULL. The {} is the code to be run for this method, in this case it is an empty code block.
+	ListNode(int x) : val(x), next(NULL) {}
+};
+
+
+class Solution {
+public:
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+		int len1, len2 = 0;
+		while (l1->next != NULL)
+			len1++;
+		while (l2->next != NULL)
+			len2++;
+		int diff = len1 - len2;
+		ListNode* p = l1;
+		if (diff > 0)
+		{
+			while (diff != 0)
+			{
+
+
+			}
+		}
+	}
+	
+	int findMin(std::vector<int>& nums) {
+		std::vector<int> copy(nums);
+		//size is len - 1
+		int num = copy.size();
+
+		int temp = copy.at(num - 1);
+
+		while (num > 1)
+		{
+			num--;
+			if (copy.at(num) > copy.at(num - 1))
+				temp = copy.at(num - 1);
+			else
+				break;
+		}
+		return temp;
+	}
+};
 
 int main()
 {
